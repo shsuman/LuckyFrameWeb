@@ -18,10 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -364,7 +361,7 @@ public class HttpRequest {
 		if (sbParams.length() > 0) {
 			urlParam = urlParam + "?" + sbParams.substring(0, sbParams.length() - 1);
 		}
-        URL urlConet = new URL(urlParam);
+        URL urlConet = URI.create(urlParam).toURL();
         HttpURLConnection con = (HttpURLConnection)urlConet.openConnection();    
         con.setRequestMethod("GET");    
         con.setConnectTimeout(4 * 1000);    

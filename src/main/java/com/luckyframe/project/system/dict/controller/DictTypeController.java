@@ -85,7 +85,7 @@ public class DictTypeController extends BaseController
      * 修改字典类型
      */
     @GetMapping("/edit/{dictId}")
-    public String edit(@PathVariable("dictId") Long dictId, ModelMap mmap)
+    public String edit(@PathVariable Long dictId, ModelMap mmap)
     {
         mmap.put("dict", dictTypeService.selectDictTypeById(dictId));
         return "system/dict/type/edit";
@@ -124,7 +124,7 @@ public class DictTypeController extends BaseController
      */
     @RequiresPermissions("system:dict:list")
     @GetMapping("/detail/{dictId}")
-    public String detail(@PathVariable("dictId") Long dictId, ModelMap mmap)
+    public String detail(@PathVariable Long dictId, ModelMap mmap)
     {
         mmap.put("dict", dictTypeService.selectDictTypeById(dictId));
         mmap.put("dictList", dictTypeService.selectDictTypeAll());

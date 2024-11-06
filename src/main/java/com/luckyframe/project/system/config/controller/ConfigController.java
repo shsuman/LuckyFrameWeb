@@ -87,7 +87,7 @@ public class ConfigController extends BaseController
      * 修改参数配置
      */
     @GetMapping("/edit/{configId}")
-    public String edit(@PathVariable("configId") Long configId, ModelMap mmap)
+    public String edit(@PathVariable Long configId, ModelMap mmap)
     {
         mmap.put("config", configService.selectConfigById(configId));
         return "system/config/edit";

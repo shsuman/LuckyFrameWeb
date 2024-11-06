@@ -67,7 +67,7 @@ public class DictDataController extends BaseController
      * 新增字典类型
      */
     @GetMapping("/add/{dictType}")
-    public String add(@PathVariable("dictType") String dictType, ModelMap mmap)
+    public String add(@PathVariable String dictType, ModelMap mmap)
     {
         mmap.put("dictType", dictType);
         return "system/dict/data/add";
@@ -89,7 +89,7 @@ public class DictDataController extends BaseController
      * 修改字典类型
      */
     @GetMapping("/edit/{dictCode}")
-    public String edit(@PathVariable("dictCode") Long dictCode, ModelMap mmap)
+    public String edit(@PathVariable Long dictCode, ModelMap mmap)
     {
         mmap.put("dict", dictDataService.selectDictDataById(dictCode));
         return "system/dict/data/edit";
@@ -125,7 +125,7 @@ public class DictDataController extends BaseController
 	 */
     @GetMapping("/getDictDataListByStepType/{stepType}")
     @ResponseBody
-	public String getDictDataListByStepType(@PathVariable("stepType") Integer stepType) {
+	public String getDictDataListByStepType(@PathVariable Integer stepType) {
 		String str = "{\"message\": \"\",\"value\": ,\"code\": 200,\"redirect\": \"\" }";
 		try {
 			JSONObject json;

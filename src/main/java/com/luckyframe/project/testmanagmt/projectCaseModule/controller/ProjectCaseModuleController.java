@@ -80,7 +80,7 @@ public class ProjectCaseModuleController extends BaseController
 	 * 新增测试用例模块管理
 	 */
 	@GetMapping("/add/{moduleId}")
-	public String add(@PathVariable("moduleId") int moduleId, ModelMap mmap)
+	public String add(@PathVariable int moduleId, ModelMap mmap)
 	{
 		ProjectCaseModule projectCaseModule = projectCaseModuleService.selectProjectCaseModuleById(moduleId);
 		mmap.put("projectCaseModule",projectCaseModule);
@@ -109,7 +109,7 @@ public class ProjectCaseModuleController extends BaseController
 	 * 修改测试用例模块管理
 	 */
 	@GetMapping("/edit/{moduleId}")
-	public String edit(@PathVariable("moduleId") Integer moduleId, ModelMap mmap)
+	public String edit(@PathVariable Integer moduleId, ModelMap mmap)
 	{
 		ProjectCaseModule projectCaseModule=projectCaseModuleService.selectProjectCaseModuleById(moduleId);
 		mmap.put("projectCaseModule", projectCaseModule);
@@ -140,7 +140,7 @@ public class ProjectCaseModuleController extends BaseController
 	@Log(title = "测试用例模块管理", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove/{moduleId}")
 	@ResponseBody
-	public AjaxResult remove(@PathVariable("moduleId") Integer moduleId)
+	public AjaxResult remove(@PathVariable Integer moduleId)
 	{
         if (projectCaseModuleService.selectProjectCaseModuleByParentId(moduleId).size() > 0)
         {
@@ -164,7 +164,7 @@ public class ProjectCaseModuleController extends BaseController
      * @date 2019年2月26日
      */
     @GetMapping("/selectProjectCaseModuleTree/{moduleId}")
-    public String selectProjectCaseModuleTree(@PathVariable("moduleId") Integer moduleId, ModelMap mmap)
+    public String selectProjectCaseModuleTree(@PathVariable Integer moduleId, ModelMap mmap)
     {
         mmap.put("projectCaseModule", projectCaseModuleService.selectProjectCaseModuleById(moduleId));
         return "testmanagmt/projectCaseModule/tree";
@@ -175,7 +175,7 @@ public class ProjectCaseModuleController extends BaseController
      */
     @GetMapping("/treeData/{projectId}")
     @ResponseBody
-    public List<Map<String, Object>> treeData(@PathVariable("projectId") Integer projectId)
+    public List<Map<String, Object>> treeData(@PathVariable Integer projectId)
     {
     	ProjectCaseModule projectCaseModule=new ProjectCaseModule();
     	projectCaseModule.setProjectId(projectId);
@@ -187,7 +187,7 @@ public class ProjectCaseModuleController extends BaseController
      */
     @GetMapping("/getModuleByProjectId/{projectId}")
     @ResponseBody
-    public ProjectCaseModule getModuleByProjectId(@PathVariable("projectId") Integer projectId)
+    public ProjectCaseModule getModuleByProjectId(@PathVariable Integer projectId)
     {
 		return projectCaseModuleService.selectProjectCaseModuleParentZeroByProjectId(projectId);
     }

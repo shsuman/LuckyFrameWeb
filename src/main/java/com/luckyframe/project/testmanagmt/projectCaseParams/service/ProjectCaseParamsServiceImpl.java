@@ -137,7 +137,7 @@ public class ProjectCaseParamsServiceImpl implements IProjectCaseParamsService
 			ProjectCaseParams projectCaseParams  = projectCaseParamsMapper.selectProjectCaseParamsById(paramsId);
 			
 			if(!PermissionUtils.isProjectPermsPassByProjectId(projectCaseParams.getProjectId())){	
-				  throw new BusinessException(String.format("用例参数【%1$s】没有项目删除权限", projectCaseParams.getParamsName()));
+				  throw new BusinessException("用例参数【%1$s】没有项目删除权限".formatted(projectCaseParams.getParamsName()));
 			}			
 		}
 

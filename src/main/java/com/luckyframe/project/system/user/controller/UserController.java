@@ -128,7 +128,7 @@ public class UserController extends BaseController
      * 修改用户
      */
     @GetMapping("/edit/{userId}")
-    public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
+    public String edit(@PathVariable Long userId, ModelMap mmap)
     {
         mmap.put("user", userService.selectUserById(userId));
         mmap.put("roles", roleService.selectRolesByUserId(userId));
@@ -157,7 +157,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:resetPwd")
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @GetMapping("/resetPwd/{userId}")
-    public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap)
+    public String resetPwd(@PathVariable Long userId, ModelMap mmap)
     {
         mmap.put("user", userService.selectUserById(userId));
         return "system/user/resetPwd";

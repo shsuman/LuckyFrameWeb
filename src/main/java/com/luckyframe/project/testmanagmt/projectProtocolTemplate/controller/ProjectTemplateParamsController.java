@@ -6,12 +6,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.luckyframe.common.utils.security.PermissionUtils;
 import com.luckyframe.framework.aspectj.lang.annotation.Log;
@@ -47,7 +42,7 @@ public class ProjectTemplateParamsController extends BaseController
 	 * @date 2019年3月7日
 	 */
 	@GetMapping("/editParams/{templateId}")
-	public String edit(@PathVariable("templateId") Integer templateId, ModelMap mmap)
+	public String edit(@PathVariable Integer templateId, ModelMap mmap)
 	{
 		String paramsType="raw";
 		ProjectProtocolTemplate projectProtocolTemplate=projectProtocolTemplateService.selectProjectProtocolTemplateById(templateId);
@@ -69,15 +64,15 @@ public class ProjectTemplateParamsController extends BaseController
 			jsonParam.setParamName("_forTextJson");
 			jsonParam.setParamValue("");
 			jsonParam.setParamType(0);
-		}else if(templateParams.size()==1&&"_forTextJson".equals(templateParams.get(0).getParamName())){
+		}else if(templateParams.size()==1&&"_forTextJson".equals(templateParams.getFirst().getParamName())){
 			/*判断是否是RAW JSON单文本格式 */
-			jsonParam.setParamsId(templateParams.get(0).getParamsId());
+			jsonParam.setParamsId(templateParams.getFirst().getParamsId());
 			jsonParam.setTemplateId(templateId);
 			jsonParam.setParamName("_forTextJson");
 			jsonParam.setParamType(0);
-			jsonParam.setParamValue(templateParams.get(0).getParamValue());
+			jsonParam.setParamValue(templateParams.getFirst().getParamValue());
 			
-			projectTemplateParams=templateParams.get(0);
+			projectTemplateParams=templateParams.getFirst();
 			projectTemplateParams.setParamsId(0);
 			projectTemplateParams.setParamName("");
 			projectTemplateParams.setParamValue("");
@@ -106,12 +101,12 @@ public class ProjectTemplateParamsController extends BaseController
 	 */
 	@RequiresPermissions("testmanagmt:projectProtocolTemplate:edit")
 	@Log(title = "模板参数管理", businessType = BusinessType.UPDATE)
-	@RequestMapping(value = "/editSave",method=RequestMethod.POST,consumes="application/json")
+	@PostMapping(value = "/editSave",consumes="application/json")
 	@ResponseBody
 	public AjaxResult editSave(@RequestBody List<ProjectTemplateParams> projectTemplateParams)
 	{		
 		if(!PermissionUtils.isProjectPermsPassByProjectId(projectProtocolTemplateService
-				.selectProjectProtocolTemplateById(projectTemplateParams.get(0).getTemplateId()).getProjectId())){
+				.selectProjectProtocolTemplateById(projectTemplateParams.getFirst().getTemplateId()).getProjectId())){
 			return error("没有此项目保存模板参数权限");
 		}
 		

@@ -1,5 +1,6 @@
 package com.luckyframe.framework.config;
 
+import org.springframework.boot.sql.init.dependency.DependsOnDatabaseInitialization;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -17,7 +18,8 @@ import java.util.Properties;
 public class ScheduleConfig
 {
     @Bean
-    @DependsOn("flywayConfig") // 这里指定依赖于 flywayConfig 类
+    @DependsOn("flywayConfig")
+    @DependsOnDatabaseInitialization // 这里指定依赖于 flywayConfig 类
     public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource)
     {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();

@@ -106,11 +106,11 @@ public class ProjectProtocolTemplateServiceImpl implements IProjectProtocolTempl
 			ProjectProtocolTemplate projectProtocolTemplate = projectProtocolTemplateMapper.selectProjectProtocolTemplateById(templateId);
 			
 			if(projectCaseStepsMapper.selectProjectCaseStepsCountByTemplateId(templateId)>0){
-				throw new BusinessException(String.format("【%1$s】已绑定测试用例,不能删除", projectProtocolTemplate.getTemplateName()));
+				throw new BusinessException("【%1$s】已绑定测试用例,不能删除".formatted(projectProtocolTemplate.getTemplateName()));
 			}
 			
 			if(!PermissionUtils.isProjectPermsPassByProjectId(projectProtocolTemplate.getProjectId())){	
-				  throw new BusinessException(String.format("模板【%1$s】没有项目删除权限", projectProtocolTemplate.getTemplateName()));
+				  throw new BusinessException("模板【%1$s】没有项目删除权限".formatted(projectProtocolTemplate.getTemplateName()));
 			}
 			
 			projectTemplateParamsMapper.deleteProjectTemplateParamsByTemplateId(templateId);

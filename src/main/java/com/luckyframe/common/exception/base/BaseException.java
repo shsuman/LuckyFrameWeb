@@ -1,6 +1,6 @@
 package com.luckyframe.common.exception.base;
 
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 
 import com.luckyframe.common.utils.MessageUtils;
 
@@ -65,7 +65,7 @@ public class BaseException extends RuntimeException
     public String getMessage()
     {
         String message = null;
-        if (!StringUtils.isEmpty(code))
+        if (!ObjectUtils.isEmpty(code))
         {
             message = MessageUtils.message(code, args);
         }

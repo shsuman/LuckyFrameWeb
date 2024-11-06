@@ -123,7 +123,7 @@ public class ProjectProtocolTemplateController extends BaseController
 	 * 修改协议模板管理
 	 */
 	@GetMapping("/edit/{templateId}")
-	public String edit(@PathVariable("templateId") Integer templateId, ModelMap mmap)
+	public String edit(@PathVariable Integer templateId, ModelMap mmap)
 	{
 		ProjectProtocolTemplate projectProtocolTemplate = projectProtocolTemplateService.selectProjectProtocolTemplateById(templateId);
 		mmap.put("projectProtocolTemplate", projectProtocolTemplate);
@@ -153,7 +153,7 @@ public class ProjectProtocolTemplateController extends BaseController
 	 * @date 2019年3月9日
 	 */
 	@GetMapping("/copy/{templateId}")
-	public String copy(@PathVariable("templateId") Integer templateId, ModelMap mmap)
+	public String copy(@PathVariable Integer templateId, ModelMap mmap)
 	{
 		ProjectProtocolTemplate projectProtocolTemplate = projectProtocolTemplateService.selectProjectProtocolTemplateById(templateId);
 		projectProtocolTemplate.setTemplateName("Copy【"+projectProtocolTemplate.getTemplateName()+"】");
@@ -231,7 +231,7 @@ public class ProjectProtocolTemplateController extends BaseController
 	 */
     @GetMapping("/getTemplateListByProjectId/{projectId}")
     @ResponseBody
-	public String getTemplateListByProjectId(@PathVariable("projectId") Integer projectId) {
+	public String getTemplateListByProjectId(@PathVariable Integer projectId) {
 		String str = "{\"message\": \"\",\"value\": ,\"code\": 200,\"redirect\": \"\" }";
 		try {
 			JSONObject json;

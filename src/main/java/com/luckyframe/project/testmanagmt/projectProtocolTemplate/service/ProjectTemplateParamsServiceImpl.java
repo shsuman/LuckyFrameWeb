@@ -91,8 +91,8 @@ public class ProjectTemplateParamsServiceImpl implements IProjectTemplateParamsS
 	{
 		Integer templateId=0;
 		if(null!=templateParams&&templateParams.size()>0){
-			if(null!=templateParams.get(0).getTemplateId()){
-				templateId=templateParams.get(0).getTemplateId();
+			if(null!=templateParams.getFirst().getTemplateId()){
+				templateId=templateParams.getFirst().getTemplateId();
 			}
 		}
 		return projectTemplateParamsMapper.deleteProjectTemplateParamsByTemplateId(templateId);

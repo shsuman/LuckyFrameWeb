@@ -70,7 +70,7 @@ public class JobLogController extends BaseController
     
     @RequiresPermissions("monitor:job:detail")
     @GetMapping("/detail/{jobLogId}")
-    public String detail(@PathVariable("jobLogId") Long jobLogId, ModelMap mmap)
+    public String detail(@PathVariable Long jobLogId, ModelMap mmap)
     {
         mmap.put("name", "jobLog");
         mmap.put("jobLog", jobLogService.selectJobLogById(jobLogId));

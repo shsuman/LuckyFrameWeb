@@ -88,7 +88,7 @@ public class DictTypeServiceImpl implements IDictTypeService
             DictType dictType = selectDictTypeById(dictId);
             if (dictDataMapper.countDictDataByType(dictType.getDictType()) > 0)
             {
-                throw new BusinessException(String.format("%1$s已分配,不能删除", dictType.getDictName()));
+                throw new BusinessException("%1$s已分配,不能删除".formatted(dictType.getDictName()));
             }
         }
 

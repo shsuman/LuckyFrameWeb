@@ -54,7 +54,7 @@ public class ProjectSuitePlanController extends BaseController {
 
     @RequiresPermissions("testmanagmt:projectSuite:view")
     @GetMapping("/{suiteId}")
-    public String projectSuitePlan(@PathVariable("suiteId")Integer suiteId,ModelMap mmap){
+    public String projectSuitePlan(@PathVariable Integer suiteId,ModelMap mmap){
         ProjectSuite projectSuite=projectSuiteService.selectProjectSuiteById(suiteId);
         mmap.put("projectSuite",projectSuite);
         return "testmanagmt/projectSuite/projectSuitePlan";
@@ -76,7 +76,7 @@ public class ProjectSuitePlanController extends BaseController {
 
     @RequiresPermissions("testmanagmt:projectSuite:edit")
     @Log(title = "测试计划用例", businessType = BusinessType.UPDATE)
-    @RequestMapping(value = "/saveSuitePlan",method=RequestMethod.POST,consumes="application/json")
+    @PostMapping(value = "/saveSuitePlan",consumes="application/json")
     @ResponseBody
     public AjaxResult saveSuitePlan(@RequestBody List<ProjectPlan> projectPlans)
     {
@@ -86,7 +86,7 @@ public class ProjectSuitePlanController extends BaseController {
         if(projectPlans.size()==0){
             return toAjax(1);
         }else{
-            suiteId=projectPlans.get(0).getSuiteId();
+            suiteId=projectPlans.getFirst().getSuiteId();
         }
 
         ProjectSuite projectSuite = projectSuiteService.selectProjectSuiteById(suiteId);
@@ -145,7 +145,7 @@ public class ProjectSuitePlanController extends BaseController {
      */
     @RequiresPermissions("testmanagmt:projectSuite:edit")
     @Log(title = "聚合测试计划", businessType = BusinessType.UPDATE)
-    @RequestMapping(value = "/edit",method=RequestMethod.POST,consumes="application/json")
+    @PostMapping(value = "/edit",consumes="application/json")
     @ResponseBody
     public AjaxResult edit(@RequestBody ProjectPlan projectPlan)
     {

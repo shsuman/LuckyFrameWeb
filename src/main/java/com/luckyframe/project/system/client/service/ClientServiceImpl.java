@@ -168,7 +168,7 @@ public class ClientServiceImpl implements IClientService {
         for (String clientIdStr : clientIds) {
             int clientId = Integer.parseInt(clientIdStr);
             if (taskSchedulingMapper.selectTaskSchedulingCountByClientId(clientId) > 0) {
-                throw new BusinessException(String.format("【%1$s】已绑定任务调度,不能删除", clientMapper.selectClientById(clientId).getClientName()));
+                throw new BusinessException("【%1$s】已绑定任务调度,不能删除".formatted(clientMapper.selectClientById(clientId).getClientName()));
             }
         }
 
@@ -180,7 +180,7 @@ public class ClientServiceImpl implements IClientService {
             for (ClientProject clientProject : clientProjectList) {
                 Integer projectId = clientProject.getProjectId();
                 if (!PermissionUtils.isProjectPermsPassByProjectId(projectId)) {
-                    throw new BusinessException(String.format("没有项目【%1$s】删除客户端权限", projectMapper.selectProjectById(projectId).getProjectName()));
+                    throw new BusinessException("没有项目【%1$s】删除客户端权限".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
                 }
             }
 

@@ -215,21 +215,21 @@ public class Server
         long gb = mb * 1024;
         if (size >= gb)
         {
-            return String.format("%.1f GB", (float) size / gb);
+            return "%.1f GB".formatted((float) size / gb);
         }
         else if (size >= mb)
         {
             float f = (float) size / mb;
-            return String.format(f > 100 ? "%.0f MB" : "%.1f MB", f);
+            return (f > 100 ? "%.0f MB" : "%.1f MB").formatted(f);
         }
         else if (size >= kb)
         {
             float f = (float) size / kb;
-            return String.format(f > 100 ? "%.0f KB" : "%.1f KB", f);
+            return (f > 100 ? "%.0f KB" : "%.1f KB").formatted(f);
         }
         else
         {
-            return String.format("%d B", size);
+            return "%d B".formatted(size);
         }
     }
 }

@@ -30,9 +30,8 @@ public class MapDataUtil
             {
                 value = "";
             }
-            else if (valueObj instanceof String[])
+            else if (valueObj instanceof String[] values)
             {
-                String[] values = (String[]) valueObj;
                 for (String s : values) {
                     value = s + ",";
                 }

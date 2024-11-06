@@ -116,7 +116,7 @@ public class QaVersionController extends BaseController
 	 * 修改质量管理-版本管理
 	 */
 	@GetMapping("/edit/{versionId}")
-	public String edit(@PathVariable("versionId") Integer versionId, ModelMap mmap)
+	public String edit(@PathVariable Integer versionId, ModelMap mmap)
 	{
         List<Project> projects=projectService.selectProjectAll(0);
         mmap.put("projects", projects);
@@ -141,7 +141,7 @@ public class QaVersionController extends BaseController
 	 * 展示版本详细信息
 	 */
 	@GetMapping("/showVersionDetail/{versionId}")
-	public String showVersionDetail(@PathVariable("versionId") Integer versionId, ModelMap mmap)
+	public String showVersionDetail(@PathVariable Integer versionId, ModelMap mmap)
 	{
 		QaVersion qaVersion = qaVersionService.selectQaVersionById(versionId);
 		mmap.put("qaVersion", qaVersion);

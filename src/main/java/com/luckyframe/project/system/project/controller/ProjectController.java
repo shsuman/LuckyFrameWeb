@@ -95,7 +95,7 @@ public class ProjectController extends BaseController
 	 * 修改测试项目管理
 	 */
 	@GetMapping("/edit/{projectId}")
-	public String edit(@PathVariable("projectId") Integer projectId, ModelMap mmap)
+	public String edit(@PathVariable Integer projectId, ModelMap mmap)
 	{
 		Project project = projectService.selectProjectById(projectId);
 		mmap.put("project", project);

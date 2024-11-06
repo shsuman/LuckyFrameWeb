@@ -160,7 +160,7 @@ public class RoleServiceImpl implements IRoleService
             Role role = selectRoleById(roleId);
             if (countUserRoleByRoleId(roleId) > 0)
             {
-                throw new BusinessException(String.format("%1$s已分配,不能删除", role.getRoleName()));
+                throw new BusinessException("%1$s已分配,不能删除".formatted(role.getRoleName()));
             }
         }
         //删除角色与项目关联后再插入新的数据

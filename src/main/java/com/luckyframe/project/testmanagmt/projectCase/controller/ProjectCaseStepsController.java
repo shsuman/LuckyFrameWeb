@@ -61,7 +61,7 @@ public class ProjectCaseStepsController extends BaseController {
      * 修改测试用例步骤管理
      */
     @GetMapping("/edit/{caseId}")
-    public String edit(@PathVariable("caseId") Integer caseId, ModelMap mmap) {
+    public String edit(@PathVariable Integer caseId, ModelMap mmap) {
         ProjectCase projectCase = projectCaseService.selectProjectCaseById(caseId);
         ProjectCaseSteps projectCaseSteps = new ProjectCaseSteps();
         projectCaseSteps.setCaseId(caseId);
@@ -92,7 +92,7 @@ public class ProjectCaseStepsController extends BaseController {
                         ProjectPageObject tmp = new ProjectPageObject();
                         tmp.setProjectId(steps.getProjectId());
                         tmp.setPageId(pageId);
-                        ProjectPageObject projectPageObject = projectPageObjectService.selectProjectPageObjectList(tmp).get(0);
+                        ProjectPageObject projectPageObject = projectPageObjectService.selectProjectPageObjectList(tmp).getFirst();
                         String pageName = projectPageObject.getPageName();
                         projectPageObject.setProjectId(steps.getProjectId());
                         ProjectPageDetail projectPageDetail = projectPageDetailService.selectProjectPageDetailById(elementId);
@@ -127,10 +127,10 @@ public class ProjectCaseStepsController extends BaseController {
          */
         @RequiresPermissions("testmanagmt:projectCase:edit")
         @Log(title = "测试用例步骤管理", businessType = BusinessType.UPDATE)
-        @RequestMapping(value = "/editSave", method = RequestMethod.POST, consumes = "application/json")
+        @PostMapping(value = "/editSave", consumes = "application/json")
         @ResponseBody
         public AjaxResult editSave (@RequestBody List < ProjectCaseSteps > listSteps) {
-            if (!PermissionUtils.isProjectPermsPassByProjectId(listSteps.get(0).getProjectId())) {
+            if (!PermissionUtils.isProjectPermsPassByProjectId(listSteps.getFirst().getProjectId())) {
                 return error("没有此项目编辑用例步骤权限");
             }
 
@@ -182,7 +182,7 @@ public class ProjectCaseStepsController extends BaseController {
                         ProjectPageObject tmp = new ProjectPageObject();
                         tmp.setProjectId(pjcs.getProjectId());
                         tmp.setPageId(pageId);
-                        ProjectPageObject projectPageObject = projectPageObjectService.selectProjectPageObjectList(tmp).get(0);
+                        ProjectPageObject projectPageObject = projectPageObjectService.selectProjectPageObjectList(tmp).getFirst();
                         String pageName = projectPageObject.getPageName();
                         projectPageObject.setProjectId(pjcs.getProjectId());
                         ProjectPageDetail projectPageDetail = projectPageDetailService.selectProjectPageDetailById(elementId);
@@ -224,7 +224,7 @@ public class ProjectCaseStepsController extends BaseController {
         @RequiresPermissions("testmanagmt:projectCase:exportcasestep")
         @PostMapping("/export")
         @ResponseBody
-        public AjaxResult export (@RequestParam("caseId") Integer caseId){
+        public AjaxResult export (@RequestParam Integer caseId){
             ProjectCase projectCase = projectCaseService.selectProjectCaseById(caseId);
             ProjectCaseSteps projectCaseSteps = new ProjectCaseSteps();
             projectCaseSteps.setCaseId(caseId);

@@ -117,7 +117,7 @@ public class ProjectCaseParamsController extends BaseController
 	 * 修改用例公共参数
 	 */
 	@GetMapping("/edit/{paramsId}")
-	public String edit(@PathVariable("paramsId") Integer paramsId, ModelMap mmap)
+	public String edit(@PathVariable Integer paramsId, ModelMap mmap)
 	{
         List<Project> projects=projectService.selectProjectAll(0);
         mmap.put("projects", projects);
@@ -180,7 +180,7 @@ public class ProjectCaseParamsController extends BaseController
 	 */
 	@GetMapping("/getProjectEnvListByProjectId/{projectId}")
 	@ResponseBody
-	public String getProjectEnvListByProjectId(@PathVariable("projectId") Integer projectId)
+	public String getProjectEnvListByProjectId(@PathVariable Integer projectId)
 	{
 		List<String> envList = projectCaseParamsService.selectProjectEnvListByProjectId(projectId);
 		if(envList.size()==0){

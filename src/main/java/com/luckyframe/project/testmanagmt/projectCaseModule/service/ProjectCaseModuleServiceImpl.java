@@ -160,7 +160,7 @@ public class ProjectCaseModuleServiceImpl implements IProjectCaseModuleService
 	public int deleteProjectCaseModuleById(Integer moduleId) throws BusinessException
 	{
 		if(projectCaseMapper.selectProjectCaseCountByModuleId(moduleId)>0){
-			throw new BusinessException(String.format("【%1$s】已绑定测试用例,不能删除", projectCaseModuleMapper.selectProjectCaseModuleById(moduleId).getModuleName()));
+			throw new BusinessException("【%1$s】已绑定测试用例,不能删除".formatted(projectCaseModuleMapper.selectProjectCaseModuleById(moduleId).getModuleName()));
 		}
 		
 		if(!PermissionUtils.isProjectPermsPassByProjectId(projectCaseModuleMapper.selectProjectCaseModuleById(moduleId).getProjectId())){	
@@ -265,7 +265,7 @@ public class ProjectCaseModuleServiceImpl implements IProjectCaseModuleService
 				if (projects.size() == 1 && !module.getModuleName().equals("") && !module.getAncestors().equals(""))   //如果项目存在，且模块名称、祖模块列表不为空
 				{
 					int flag=1;
-					Integer projectId =projects.get(0).getProjectId();
+					Integer projectId =projects.getFirst().getProjectId();
 					ProjectCaseModule pcm = new ProjectCaseModule();
 					pcm.setProjectId(projectId);
 					pcm.setModuleName(module.getModuleName());
@@ -281,12 +281,12 @@ public class ProjectCaseModuleServiceImpl implements IProjectCaseModuleService
 							pcmodule.setProjectId(projectId);
 							List<ProjectCaseModule> nodes = projectCaseModuleMapper.selectProjectCaseModuleListPrecise(pcmodule);
 							if (nodes!=null&&nodes.size()>0) {   //如果节点存在，则从map取
-								nodeMap.put(ancestors[i], nodes.get(0).getModuleId());
+								nodeMap.put(ancestors[i], nodes.getFirst().getModuleId());
 								if(i == 0) {
-									sb.replace(module.getAncestors().indexOf(ancestors[i]), module.getAncestors().indexOf(ancestors[i]) + ancestors[i].length(), nodes.get(0).getModuleId().toString());
+									sb.replace(module.getAncestors().indexOf(ancestors[i]), module.getAncestors().indexOf(ancestors[i]) + ancestors[i].length(), nodes.getFirst().getModuleId().toString());
 								}
 								else {
-									sb.replace(StringUtils.ordinalIndexOf(sb,",",i)+1, StringUtils.ordinalIndexOf(sb,",",i)+1+ ancestors[i].length(), nodes.get(0).getModuleId().toString());
+									sb.replace(StringUtils.ordinalIndexOf(sb,",",i)+1, StringUtils.ordinalIndexOf(sb,",",i)+1+ ancestors[i].length(), nodes.getFirst().getModuleId().toString());
 								}
 
 							}

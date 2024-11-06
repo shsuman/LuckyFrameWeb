@@ -57,7 +57,7 @@ public class ProjectCaseDebugController extends BaseController
 	 * @date 2019年3月14日
 	 */
 	@GetMapping("/projectCaseDebug/{caseId}")
-	public String projectCaseDebug(@PathVariable("caseId") Integer caseId, ModelMap mmap)
+	public String projectCaseDebug(@PathVariable Integer caseId, ModelMap mmap)
 	{
 		ProjectCase projectCase = projectCaseService.selectProjectCaseById(caseId);
 		ProjectCaseDebug projectCaseDebug=new ProjectCaseDebug();
@@ -67,7 +67,7 @@ public class ProjectCaseDebugController extends BaseController
 		projectCaseDebug.setCaseType(projectCase.getCaseType());
 		List<Client> clients=clientService.selectClientsByProjectId(projectCase.getProjectId());
 		if(clients.size()>0){
-			List<String> driverPathList=clientService.selectClientDriverListById(clients.get(0).getClientId());
+			List<String> driverPathList=clientService.selectClientDriverListById(clients.getFirst().getClientId());
 			mmap.put("driverPathList", driverPathList);
 		}		
 		mmap.put("projectCaseDebug", projectCaseDebug);

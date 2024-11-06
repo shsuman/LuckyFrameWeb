@@ -35,9 +35,8 @@ public class OnlineSessionFactory implements SessionFactory
     public Session createSession(SessionContext initData)
     {
         OnlineSession session = new OnlineSession();
-        if (initData instanceof WebSessionContext)
+        if (initData instanceof WebSessionContext sessionContext)
         {
-            WebSessionContext sessionContext = (WebSessionContext) initData;
             HttpServletRequest request = (HttpServletRequest) sessionContext.getServletRequest();
             if (request != null)
             {
