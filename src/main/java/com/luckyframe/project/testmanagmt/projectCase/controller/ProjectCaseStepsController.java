@@ -92,7 +92,7 @@ public class ProjectCaseStepsController extends BaseController {
                         ProjectPageObject tmp = new ProjectPageObject();
                         tmp.setProjectId(steps.getProjectId());
                         tmp.setPageId(pageId);
-                        ProjectPageObject projectPageObject = projectPageObjectService.selectProjectPageObjectList(tmp).get(0);
+                        ProjectPageObject projectPageObject = projectPageObjectService.selectProjectPageObjectList(tmp).getFirst();
                         String pageName = projectPageObject.getPageName();
                         projectPageObject.setProjectId(steps.getProjectId());
                         ProjectPageDetail projectPageDetail = projectPageDetailService.selectProjectPageDetailById(elementId);
@@ -130,7 +130,7 @@ public class ProjectCaseStepsController extends BaseController {
         @RequestMapping(value = "/editSave", method = RequestMethod.POST, consumes = "application/json")
         @ResponseBody
         public AjaxResult editSave (@RequestBody List < ProjectCaseSteps > listSteps) {
-            if (!PermissionUtils.isProjectPermsPassByProjectId(listSteps.get(0).getProjectId())) {
+            if (!PermissionUtils.isProjectPermsPassByProjectId(listSteps.getFirst().getProjectId())) {
                 return error("没有此项目编辑用例步骤权限");
             }
 
@@ -182,7 +182,7 @@ public class ProjectCaseStepsController extends BaseController {
                         ProjectPageObject tmp = new ProjectPageObject();
                         tmp.setProjectId(pjcs.getProjectId());
                         tmp.setPageId(pageId);
-                        ProjectPageObject projectPageObject = projectPageObjectService.selectProjectPageObjectList(tmp).get(0);
+                        ProjectPageObject projectPageObject = projectPageObjectService.selectProjectPageObjectList(tmp).getFirst();
                         String pageName = projectPageObject.getPageName();
                         projectPageObject.setProjectId(pjcs.getProjectId());
                         ProjectPageDetail projectPageDetail = projectPageDetailService.selectProjectPageDetailById(elementId);

@@ -124,8 +124,8 @@ public class ProjectPageDetailServiceImpl implements IProjectPageDetailService
 						Integer elementId = Integer.parseInt(pcs.getStepPath().split("\\.")[1]);
 						if(pdId.equals(elementId)){
 							String caseSign = projectCaseService.selectProjectCaseById(pcs.getCaseId()).getCaseSign();
-							throw new BusinessException(String.format("当前元素【%1$s】有关联用例步骤【%2$s】使用，请先删除或修改用例步骤！",
-									projectPageDetail.getElement(),caseSign));
+							throw new BusinessException("当前元素【%1$s】有关联用例步骤【%2$s】使用，请先删除或修改用例步骤！".formatted(
+                                projectPageDetail.getElement(), caseSign));
 						}
 					}
 

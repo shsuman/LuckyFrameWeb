@@ -100,7 +100,7 @@ public class PostServiceImpl implements IPostService
             Post post = selectPostById(postId);
             if (countUserPostById(postId) > 0)
             {
-                throw new BusinessException(String.format("%1$s已分配,不能删除", post.getPostName()));
+                throw new BusinessException("%1$s已分配,不能删除".formatted(post.getPostName()));
             }
         }
         return postMapper.deletePostByIds(postIds);

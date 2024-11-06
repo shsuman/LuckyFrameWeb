@@ -69,15 +69,15 @@ public class ProjectTemplateParamsController extends BaseController
 			jsonParam.setParamName("_forTextJson");
 			jsonParam.setParamValue("");
 			jsonParam.setParamType(0);
-		}else if(templateParams.size()==1&&"_forTextJson".equals(templateParams.get(0).getParamName())){
+		}else if(templateParams.size()==1&&"_forTextJson".equals(templateParams.getFirst().getParamName())){
 			/*判断是否是RAW JSON单文本格式 */
-			jsonParam.setParamsId(templateParams.get(0).getParamsId());
+			jsonParam.setParamsId(templateParams.getFirst().getParamsId());
 			jsonParam.setTemplateId(templateId);
 			jsonParam.setParamName("_forTextJson");
 			jsonParam.setParamType(0);
-			jsonParam.setParamValue(templateParams.get(0).getParamValue());
+			jsonParam.setParamValue(templateParams.getFirst().getParamValue());
 			
-			projectTemplateParams=templateParams.get(0);
+			projectTemplateParams=templateParams.getFirst();
 			projectTemplateParams.setParamsId(0);
 			projectTemplateParams.setParamName("");
 			projectTemplateParams.setParamValue("");
@@ -111,7 +111,7 @@ public class ProjectTemplateParamsController extends BaseController
 	public AjaxResult editSave(@RequestBody List<ProjectTemplateParams> projectTemplateParams)
 	{		
 		if(!PermissionUtils.isProjectPermsPassByProjectId(projectProtocolTemplateService
-				.selectProjectProtocolTemplateById(projectTemplateParams.get(0).getTemplateId()).getProjectId())){
+				.selectProjectProtocolTemplateById(projectTemplateParams.getFirst().getTemplateId()).getProjectId())){
 			return error("没有此项目保存模板参数权限");
 		}
 		

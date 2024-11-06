@@ -94,7 +94,7 @@ public class TaskSchedulingController extends BaseController
         	mmap.put("defaultProjectId", ShiroUtils.getProjectId());
         	List<Client> defaultClients=clientService.selectClientsByProjectId(ShiroUtils.getProjectId());
         	if(defaultClients.size()>0){
-        		mmap.put("defaultClientId", defaultClients.get(0).getClientId());
+        		mmap.put("defaultClientId", defaultClients.getFirst().getClientId());
         	}
         }
         
@@ -137,7 +137,7 @@ public class TaskSchedulingController extends BaseController
         List<Project> projects=projectService.selectProjectAll(0);
         mmap.put("projects", projects);
         if(projects.size()>0){
-        	Integer projectId=projects.get(0).getProjectId();
+        	Integer projectId=projects.getFirst().getProjectId();
             if(StringUtils.isNotEmpty(ShiroUtils.getProjectId())){
             	projectId = ShiroUtils.getProjectId();
             	mmap.put("defaultProjectId", projectId);
@@ -154,7 +154,7 @@ public class TaskSchedulingController extends BaseController
 			}
 			mmap.put("envList",envList);
         	if(clientList.size()>0){
-        		List<String> driverPathList = clientService.selectClientDriverListById(clientList.get(0).getClientId());
+        		List<String> driverPathList = clientService.selectClientDriverListById(clientList.getFirst().getClientId());
         		mmap.put("driverPathList", driverPathList);
         	}       	
         }       
@@ -415,7 +415,7 @@ public class TaskSchedulingController extends BaseController
 		List<Client> clientList = clientService.selectClientList(client);
     	if(clientList.size()>0){
             mmap.put("clientList", clientList);
-    		List<String> driverPathList = clientService.selectClientDriverListById(clientList.get(0).getClientId());
+    		List<String> driverPathList = clientService.selectClientDriverListById(clientList.getFirst().getClientId());
     		mmap.put("driverPathList", driverPathList);
     	}
 	    return "testexecution/taskScheduling/uploadJar";

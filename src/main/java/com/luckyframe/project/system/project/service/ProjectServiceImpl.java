@@ -151,29 +151,29 @@ public class ProjectServiceImpl implements IProjectService
 		for(String projectIdStr:projectIds){
 			int projectId=Integer.parseInt(projectIdStr);
 			if(projectCaseModuleMapper.selectProjectCaseModuleCountByProjectId(projectId)>0){
-				throw new BusinessException(String.format("【%1$s】已绑定子用例模块,不能删除", projectMapper.selectProjectById(projectId).getProjectName()));
+				throw new BusinessException("【%1$s】已绑定子用例模块,不能删除".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
 			}
 			if(clientProjectMapper.selectClientProjectCountByProjectId(projectId)>0){
-				throw new BusinessException(String.format("【%1$s】已绑定客户端,不能删除", projectMapper.selectProjectById(projectId).getProjectName()));
+				throw new BusinessException("【%1$s】已绑定客户端,不能删除".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
 			}
 			if(projectCaseMapper.selectProjectCaseCountByProjectId(projectId)>0){
-				throw new BusinessException(String.format("【%1$s】已绑定测试用例,不能删除", projectMapper.selectProjectById(projectId).getProjectName()));
+				throw new BusinessException("【%1$s】已绑定测试用例,不能删除".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
 			}
 			if(taskSchedulingMapper.selectTaskSchedulingCountByProjectId(projectId)>0){
-				throw new BusinessException(String.format("【%1$s】已绑定调度,不能删除", projectMapper.selectProjectById(projectId).getProjectName()));
+				throw new BusinessException("【%1$s】已绑定调度,不能删除".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
 			}
 			if(taskExecuteMapper.selectTaskExecuteCountByProjectId(projectId)>0){
-				throw new BusinessException(String.format("【%1$s】已生成执行任务,不能删除", projectMapper.selectProjectById(projectId).getProjectName()));
+				throw new BusinessException("【%1$s】已生成执行任务,不能删除".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
 			}
 			if(taskCaseExecuteMapper.selectTaskCaseExecuteCountByProjectId(projectId)>0){
-				throw new BusinessException(String.format("【%1$s】已生成执行用例明细,不能删除", projectMapper.selectProjectById(projectId).getProjectName()));
+				throw new BusinessException("【%1$s】已生成执行用例明细,不能删除".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
 			}
 			if(!PermissionUtils.isProjectPermsPassByProjectId(projectId)){	
-				throw new BusinessException(String.format("没有项目【%1$s】删除权限", projectMapper.selectProjectById(projectId).getProjectName()));
+				throw new BusinessException("没有项目【%1$s】删除权限".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
 			}			
 			List<Project> listProject = selectProjectAll(0);
 			if(listProject.size()<=1){
-				throw new BusinessException(String.format("【%1$s】是系统中唯一项目,不能删除", projectMapper.selectProjectById(projectId).getProjectName()));
+				throw new BusinessException("【%1$s】是系统中唯一项目,不能删除".formatted(projectMapper.selectProjectById(projectId).getProjectName()));
 			}
 		}
 		projectCaseModuleMapper.deleteProjectCaseModuleByProjectIds(projectIds);

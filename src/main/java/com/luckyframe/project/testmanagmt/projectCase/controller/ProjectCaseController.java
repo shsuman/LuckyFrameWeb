@@ -127,7 +127,7 @@ public class ProjectCaseController extends BaseController
 						.selectProjectCaseModuleParentZeroByProjectId(ShiroUtils.getProjectId());
 			} else {
 				projectCaseModule = projectCaseModuleService
-						.selectProjectCaseModuleParentZeroByProjectId(projects.get(0).getProjectId());
+						.selectProjectCaseModuleParentZeroByProjectId(projects.getFirst().getProjectId());
 			}
 			mmap.put("projectCaseModule", projectCaseModule);
 		}
@@ -206,7 +206,7 @@ public class ProjectCaseController extends BaseController
         List<Project> projects=projectService.selectProjectAll(projectCase.getProjectId());
         mmap.put("projects", projects);
         if(projects.size()>0){
-        	ProjectCaseModule projectCaseModule = projectCaseModuleService.selectProjectCaseModuleParentZeroByProjectId(projects.get(0).getProjectId());
+        	ProjectCaseModule projectCaseModule = projectCaseModuleService.selectProjectCaseModuleParentZeroByProjectId(projects.getFirst().getProjectId());
         	mmap.put("projectCaseModule", projectCaseModule);
         }
 		mmap.put("projectCase", projectCase);

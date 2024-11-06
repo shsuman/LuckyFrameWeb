@@ -61,7 +61,7 @@ public class TableInfo extends BaseEntity
         ColumnInfo columnInfo = null;
         if (StringUtils.isNotNull(columns) && columns.size() > 0)
         {
-            columnInfo = columns.get(0);
+            columnInfo = columns.getFirst();
         }
         return columnInfo;
     }

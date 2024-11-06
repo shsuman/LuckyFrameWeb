@@ -86,7 +86,7 @@ public class ProjectSuitePlanController extends BaseController {
         if(projectPlans.size()==0){
             return toAjax(1);
         }else{
-            suiteId=projectPlans.get(0).getSuiteId();
+            suiteId=projectPlans.getFirst().getSuiteId();
         }
 
         ProjectSuite projectSuite = projectSuiteService.selectProjectSuiteById(suiteId);

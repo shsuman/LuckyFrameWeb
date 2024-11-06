@@ -111,8 +111,8 @@ public class ProjectCaseStepsServiceImpl implements IProjectCaseStepsService
 	{
 		int caseId=0;
 		if(null!=listSteps&&listSteps.size()>0){
-			if(null!=listSteps.get(0).getCaseId()){
-				caseId=listSteps.get(0).getCaseId();
+			if(null!=listSteps.getFirst().getCaseId()){
+				caseId=listSteps.getFirst().getCaseId();
 			}
 		}
 		return projectCaseStepsMapper.deleteProjectCaseStepsByCaseId(caseId);

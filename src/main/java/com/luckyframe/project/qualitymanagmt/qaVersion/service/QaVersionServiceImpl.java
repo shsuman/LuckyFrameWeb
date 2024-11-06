@@ -1,6 +1,7 @@
 package com.luckyframe.project.qualitymanagmt.qaVersion.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -71,13 +72,13 @@ public class QaVersionServiceImpl implements IQaVersionService
 			/*计算工期偏移百分比，保留两位小数*/
 			float deviationPercent = (float)projectDeviationDays/qaVersion.getTimeLimitVersion();
 			BigDecimal bigDecimal = new BigDecimal(deviationPercent*100);  
-			deviationPercent = bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).floatValue(); 
+			deviationPercent = bigDecimal.setScale(2, RoundingMode.HALF_UP).floatValue(); 
 			qaVersion.setProjectDeviationPercent(deviationPercent);
 			
 			/*计算需求完成百分比，保留两位小数*/
 			float demandPercent = (float)qaVersion.getDemandActuallyFinish()/qaVersion.getDemandPlanFinish();
 			BigDecimal bigDecimal1 = new BigDecimal(demandPercent*100);  
-			demandPercent = bigDecimal1.setScale(2,BigDecimal.ROUND_HALF_UP).floatValue(); 
+			demandPercent = bigDecimal1.setScale(2, RoundingMode.HALF_UP).floatValue(); 
 			qaVersion.setDemandPercent(demandPercent);
 			
 			/*计算缺陷DI值*/
@@ -111,13 +112,13 @@ public class QaVersionServiceImpl implements IQaVersionService
 			/*计算工期偏移百分比，保留两位小数*/
 			float deviationPercent = (float)projectDeviationDays/qaVersion.getTimeLimitVersion();
 			BigDecimal bigDecimal = new BigDecimal(deviationPercent*100);  
-			deviationPercent = bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).floatValue(); 
+			deviationPercent = bigDecimal.setScale(2, RoundingMode.HALF_UP).floatValue(); 
 			qaVersion.setProjectDeviationPercent(deviationPercent);
 			
 			/*计算需求完成百分比，保留两位小数*/
 			float demandPercent = (float)qaVersion.getDemandActuallyFinish()/qaVersion.getDemandPlanFinish();
 			BigDecimal bigDecimal1 = new BigDecimal(demandPercent*100);  
-			demandPercent = bigDecimal1.setScale(2,BigDecimal.ROUND_HALF_UP).floatValue(); 
+			demandPercent = bigDecimal1.setScale(2, RoundingMode.HALF_UP).floatValue(); 
 			qaVersion.setDemandPercent(demandPercent);
 			
 			/*计算缺陷DI值*/
@@ -146,7 +147,7 @@ public class QaVersionServiceImpl implements IQaVersionService
 		int b=14;
 		float a = (float) i/b;
 		BigDecimal bb = new BigDecimal(a*100);  
-		float   m_price   =  bb.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue(); 
+		float   m_price   =  bb.setScale(2, RoundingMode.HALF_UP).floatValue(); 
 		System.out.println(m_price);
 	}
 }

@@ -231,9 +231,9 @@ public class ExcelUtil<T>
                         {
                             val = DateUtils.parseDate(val);
                         }
-                        else if (val instanceof Double)
+                        else if (val instanceof Double double1)
                         {
-                            val = DateUtil.getJavaDate((Double) val);
+                            val = DateUtil.getJavaDate(double1);
                         }
                     }
                     if (StringUtils.isNotNull(fieldType))

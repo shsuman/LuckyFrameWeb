@@ -1,6 +1,8 @@
 package com.luckyframe.framework.config;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 
 /**
@@ -20,7 +22,7 @@ public class KaptchaTextCreator extends DefaultTextCreator
         int x = random.nextInt(10);
         int y = random.nextInt(10);
         StringBuilder suChinese = new StringBuilder();
-        int randomoperands = (int) Math.round(Math.random() * 2);
+        int randomoperands = (int) Math.round(ThreadLocalRandom.current().nextDouble() * 2);
         if (randomoperands == 0)
         {
             result = x * y;

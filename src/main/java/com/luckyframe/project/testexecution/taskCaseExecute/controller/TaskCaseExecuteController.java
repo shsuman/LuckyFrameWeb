@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.ConnectException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -398,7 +399,7 @@ public class TaskCaseExecuteController extends BaseController
 		} else {
 			double percase = (double) casesuccount / casecount;
 			BigDecimal bcase = new BigDecimal(percase * 100);
-			percase = bcase.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			percase = bcase.setScale(2, RoundingMode.HALF_UP).doubleValue();
 			casedata[1] = String.valueOf(percase);
 		}
 
@@ -415,7 +416,7 @@ public class TaskCaseExecuteController extends BaseController
 			}
 
 			BigDecimal bperrl = new BigDecimal(per);
-			per = bperrl.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			per = bperrl.setScale(2, RoundingMode.HALF_UP).doubleValue();
 			logdata[0] = String.valueOf(per);
 		}
 		logdata[1] = String.valueOf(taskCaseLogService.selectTaskCaseLogCount());

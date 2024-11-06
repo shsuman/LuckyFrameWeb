@@ -102,7 +102,7 @@ public class ProjectPlanCaseController extends BaseController
 		if(projectCases.size()==0){
 			return toAjax(1);
 		}else{
-			planId=projectCases.get(0).getPlanId();
+			planId=projectCases.getFirst().getPlanId();
 		}
 		
 		ProjectPlan projectPlan = projectPlanService.selectProjectPlanById(planId);

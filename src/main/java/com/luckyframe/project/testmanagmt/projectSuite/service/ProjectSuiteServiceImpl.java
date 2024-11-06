@@ -96,10 +96,10 @@ public class ProjectSuiteServiceImpl implements IprojectSuiteService{
             ProjectSuite ProjectSuite = projectSuiteMapper.selectProjectSuiteById(suiteId);
 
             if(taskSchedulingMapper.selectTaskSchedulingCountBySuiteId(suiteId)>0){
-                throw new BusinessException(String.format("【%1$s】已绑定调度任务,不能删除", ProjectSuite.getSuiteName()));
+                throw new BusinessException("【%1$s】已绑定调度任务,不能删除".formatted(ProjectSuite.getSuiteName()));
             }
             if(!PermissionUtils.isProjectPermsPassByProjectId(ProjectSuite.getProjectId())){
-                throw new BusinessException(String.format("测试计划【%1$s】没有项目删除权限", ProjectSuite.getSuiteName()));
+                throw new BusinessException("测试计划【%1$s】没有项目删除权限".formatted(ProjectSuite.getSuiteName()));
             }
 
             projectSuitePlanMapper.deleteProjectSuitePlanBySuiteId(suiteId);
