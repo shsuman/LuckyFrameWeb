@@ -170,10 +170,10 @@ public class ProjectPlanServiceImpl implements IProjectPlanService
 			ProjectPlan ProjectPlan = projectPlanMapper.selectProjectPlanById(planId);
 			
 			if(taskSchedulingMapper.selectTaskSchedulingCountByPlanId(planId)>0){
-				throw new BusinessException(String.format("【%1$s】已绑定调度任务,不能删除", ProjectPlan.getPlanName()));
+				throw new BusinessException("【%1$s】已绑定调度任务,不能删除".formatted(ProjectPlan.getPlanName()));
 			}
 			if(!PermissionUtils.isProjectPermsPassByProjectId(ProjectPlan.getProjectId())){	
-				  throw new BusinessException(String.format("测试计划【%1$s】没有项目删除权限", ProjectPlan.getPlanName()));
+				  throw new BusinessException("测试计划【%1$s】没有项目删除权限".formatted(ProjectPlan.getPlanName()));
 			}
 			
 			projectPlanCaseMapper.deleteProjectPlanCaseByPlanId(planId);

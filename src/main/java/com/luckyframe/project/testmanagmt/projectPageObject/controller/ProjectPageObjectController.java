@@ -115,7 +115,7 @@ public class ProjectPageObjectController extends BaseController {
      * 修改页面配置管理
      */
     @GetMapping("/edit/{projectId}")
-    public String edit(@PathVariable("projectId") Integer projectId, ModelMap mmap) {
+    public String edit(@PathVariable Integer projectId, ModelMap mmap) {
         List<Project> projects = projectService.selectProjectAll(0);
         Map<Integer,String> map=new HashMap<Integer,String>();
         for(Project p:projects){

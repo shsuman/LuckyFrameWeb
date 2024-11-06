@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.security.cert.X509Certificate;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -43,7 +40,7 @@ public class HttpUtils
         {
             String urlNameString = url + "?" + param;
             log.info("sendGet - {}", urlNameString);
-            URL realUrl = new URL(urlNameString);
+            URL realUrl = URI.create(urlNameString).toURL();
             URLConnection connection = realUrl.openConnection();
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
@@ -106,7 +103,7 @@ public class HttpUtils
         {
             String urlNameString = url + "?" + param;
             log.info("sendPost - {}", urlNameString);
-            URL realUrl = new URL(urlNameString);
+            URL realUrl = URI.create(urlNameString).toURL();
             URLConnection conn = realUrl.openConnection();
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
@@ -172,7 +169,7 @@ public class HttpUtils
             log.info("sendSSLPost - {}", urlNameString);
             SSLContext sc = SSLContext.getInstance("SSL");
             sc.init(null, new TrustManager[] { new TrustAnyTrustManager() }, new java.security.SecureRandom());
-            URL console = new URL(urlNameString);
+            URL console = URI.create(urlNameString).toURL();
             HttpsURLConnection conn = (HttpsURLConnection) console.openConnection();
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");

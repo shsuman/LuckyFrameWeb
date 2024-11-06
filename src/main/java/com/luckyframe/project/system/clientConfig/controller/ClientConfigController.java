@@ -96,7 +96,7 @@ public class ClientConfigController extends BaseController
 	 * 修改客户端配置
 	 */
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") Integer id, ModelMap mmap)
+	public String edit(@PathVariable Integer id, ModelMap mmap)
 	{
 		ClientConfig clientConfig = clientConfigService.selectClientConfigById(id);
 		clientConfig.setCurrentClientId(clientConfig.getClientId());
@@ -133,7 +133,7 @@ public class ClientConfigController extends BaseController
 	 */
 	@GetMapping("/config/{clientId}/{key}")
 	@ResponseBody
-	public String config(@PathVariable("clientId") String clientIdStr,@PathVariable("key") String key) throws Exception {
+	public String config(@PathVariable("clientId") String clientIdStr,@PathVariable String key) throws Exception {
 		Integer clientId = Integer.getInteger(clientIdStr);
 		String value = clientConfigService.queryConfigValue(clientId, key);
 		JSONObject res=new JSONObject();

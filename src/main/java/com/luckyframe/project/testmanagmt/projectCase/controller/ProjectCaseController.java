@@ -127,7 +127,7 @@ public class ProjectCaseController extends BaseController
 						.selectProjectCaseModuleParentZeroByProjectId(ShiroUtils.getProjectId());
 			} else {
 				projectCaseModule = projectCaseModuleService
-						.selectProjectCaseModuleParentZeroByProjectId(projects.get(0).getProjectId());
+						.selectProjectCaseModuleParentZeroByProjectId(projects.getFirst().getProjectId());
 			}
 			mmap.put("projectCaseModule", projectCaseModule);
 		}
@@ -154,7 +154,7 @@ public class ProjectCaseController extends BaseController
 	 * 修改项目测试用例管理
 	 */
 	@GetMapping("/edit/{caseId}")
-	public String edit(@PathVariable("caseId") Integer caseId, ModelMap mmap)
+	public String edit(@PathVariable Integer caseId, ModelMap mmap)
 	{
 		ProjectCase projectCase = projectCaseService.selectProjectCaseById(caseId);
 		mmap.put("projectCase", projectCase);
@@ -186,7 +186,7 @@ public class ProjectCaseController extends BaseController
 	 * @date 2019年3月13日
 	 */
 	@GetMapping("/copy/{caseId}")
-	public String copy(@PathVariable("caseId") String caseId, ModelMap mmap)
+	public String copy(@PathVariable String caseId, ModelMap mmap)
 	{
 		ProjectCase projectCase;
 		if(caseId.contains(","))
@@ -206,7 +206,7 @@ public class ProjectCaseController extends BaseController
         List<Project> projects=projectService.selectProjectAll(projectCase.getProjectId());
         mmap.put("projects", projects);
         if(projects.size()>0){
-        	ProjectCaseModule projectCaseModule = projectCaseModuleService.selectProjectCaseModuleParentZeroByProjectId(projects.get(0).getProjectId());
+        	ProjectCaseModule projectCaseModule = projectCaseModuleService.selectProjectCaseModuleParentZeroByProjectId(projects.getFirst().getProjectId());
         	mmap.put("projectCaseModule", projectCaseModule);
         }
 		mmap.put("projectCase", projectCase);

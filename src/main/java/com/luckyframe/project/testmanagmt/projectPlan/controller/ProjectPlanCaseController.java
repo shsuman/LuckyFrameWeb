@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.luckyframe.common.utils.StringUtils;
@@ -54,7 +53,7 @@ public class ProjectPlanCaseController extends BaseController
 	
 	@RequiresPermissions("testmanagmt:projectPlan:view")
 	@GetMapping("/{planId}")
-	public String projectPlanCase(@PathVariable("planId") Integer planId, ModelMap mmap)
+	public String projectPlanCase(@PathVariable Integer planId, ModelMap mmap)
 	{
 		ProjectPlan projectPlan = projectPlanService.selectProjectPlanById(planId);
         ProjectCaseModule projectCaseModule = projectCaseModuleService.selectProjectCaseModuleParentZeroByProjectId(projectPlan.getProjectId());
@@ -92,7 +91,7 @@ public class ProjectPlanCaseController extends BaseController
 	 */
 	@RequiresPermissions("testmanagmt:projectPlan:edit")
 	@Log(title = "测试计划用例", businessType = BusinessType.UPDATE)
-	@RequestMapping(value = "/savePlanCase",method=RequestMethod.POST,consumes="application/json")
+	@PostMapping(value = "/savePlanCase",consumes="application/json")
 	@ResponseBody
 	public AjaxResult savePlanCase(@RequestBody List<ProjectCase> projectCases)
 	{
@@ -102,7 +101,7 @@ public class ProjectPlanCaseController extends BaseController
 		if(projectCases.size()==0){
 			return toAjax(1);
 		}else{
-			planId=projectCases.get(0).getPlanId();
+			planId=projectCases.getFirst().getPlanId();
 		}
 		
 		ProjectPlan projectPlan = projectPlanService.selectProjectPlanById(planId);
@@ -199,7 +198,7 @@ public class ProjectPlanCaseController extends BaseController
 	 */
 	@RequiresPermissions("testmanagmt:projectPlan:edit")
 	@Log(title = "测试计划用例", businessType = BusinessType.UPDATE)
-	@RequestMapping(value = "/edit",method=RequestMethod.POST,consumes="application/json")
+	@PostMapping(value = "/edit",consumes="application/json")
 	@ResponseBody
 	public AjaxResult edit(@RequestBody ProjectCase projectCase)
 	{

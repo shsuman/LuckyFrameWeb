@@ -398,9 +398,9 @@ public class ReflectUtils
         {
             return new IllegalArgumentException(msg, e);
         }
-        else if (e instanceof InvocationTargetException)
+        else if (e instanceof InvocationTargetException exception)
         {
-            return new RuntimeException(msg, ((InvocationTargetException) e).getTargetException());
+            return new RuntimeException(msg, exception.getTargetException());
         }
         return new RuntimeException(msg, e);
     }

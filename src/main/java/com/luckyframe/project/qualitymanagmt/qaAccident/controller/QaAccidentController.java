@@ -117,7 +117,7 @@ public class QaAccidentController extends BaseController
 	 * 修改生产事故登记
 	 */
 	@GetMapping("/edit/{accidentId}")
-	public String edit(@PathVariable("accidentId") Integer accidentId, ModelMap mmap)
+	public String edit(@PathVariable Integer accidentId, ModelMap mmap)
 	{
         List<Project> projects=projectService.selectProjectAll(0);
         mmap.put("projects", projects);
@@ -142,7 +142,7 @@ public class QaAccidentController extends BaseController
 	 * 展示生产事故详细信息
 	 */
 	@GetMapping("/showAccidentDetail/{accidentId}")
-	public String showAccidentDetail(@PathVariable("accidentId") Integer accidentId, ModelMap mmap)
+	public String showAccidentDetail(@PathVariable Integer accidentId, ModelMap mmap)
 	{
 		QaAccident qaAccident = qaAccidentService.selectQaAccidentById(accidentId);
 		mmap.put("qaAccident", qaAccident);

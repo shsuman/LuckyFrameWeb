@@ -117,7 +117,7 @@ public class ProjectPlanController extends BaseController
 	 * 修改测试计划
 	 */
 	@GetMapping("/edit/{planId}")
-	public String edit(@PathVariable("planId") Integer planId, ModelMap mmap)
+	public String edit(@PathVariable Integer planId, ModelMap mmap)
 	{
 		ProjectPlan projectPlan = projectPlanService.selectProjectPlanById(planId);
 		mmap.put("projectPlan", projectPlan);
@@ -179,7 +179,7 @@ public class ProjectPlanController extends BaseController
 	 */
     @GetMapping("/getProjectPlanListByProjectId/{projectId}")
 	@ResponseBody
-	public String getProjectPlanListByProjectId(@PathVariable("projectId") Integer projectId)
+	public String getProjectPlanListByProjectId(@PathVariable Integer projectId)
 	{
     	List<ProjectPlan> planList = projectPlanService.selectProjectPlanListByProjectId(projectId);
 		JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(planList));

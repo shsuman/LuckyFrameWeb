@@ -150,11 +150,11 @@ public class TaskSchedulingServiceImpl implements ITaskSchedulingService
 			TaskScheduling taskScheduling = taskSchedulingMapper.selectTaskSchedulingById(Integer.valueOf(tsId));
 			
 			if(taskExecuteMapper.selectTaskExecuteCountBySchedulingId(taskScheduling.getSchedulingId())>0){
-				throw new BusinessException(String.format("【%1$s】已有执行记录,请先删除任务记录", taskScheduling.getSchedulingName()));
+				throw new BusinessException("【%1$s】已有执行记录,请先删除任务记录".formatted(taskScheduling.getSchedulingName()));
 			}
 			
 			if(!PermissionUtils.isProjectPermsPassByProjectId(taskScheduling.getProjectId())){	
-				  throw new BusinessException(String.format("调度【%1$s】没有项目删除权限", taskScheduling.getSchedulingName()));
+				  throw new BusinessException("调度【%1$s】没有项目删除权限".formatted(taskScheduling.getSchedulingName()));
 			}
 			
 			Job job = taskScheduling.getJob();

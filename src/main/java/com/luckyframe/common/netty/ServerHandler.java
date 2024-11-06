@@ -306,8 +306,7 @@ public class ServerHandler extends ChannelHandlerAdapter {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if (evt instanceof IdleStateEvent) {
-            IdleStateEvent event = (IdleStateEvent) evt;
+        if (evt instanceof IdleStateEvent event) {
             if (event.state().equals(IdleState.READER_IDLE)) {
                 // 空闲40s之后触发 (心跳包丢失)
                 if (counter >= 3) {

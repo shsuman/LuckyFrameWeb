@@ -51,7 +51,7 @@ public class DeptController extends BaseController
      * 新增部门
      */
     @GetMapping("/add/{parentId}")
-    public String add(@PathVariable("parentId") Long parentId, ModelMap mmap)
+    public String add(@PathVariable Long parentId, ModelMap mmap)
     {
         mmap.put("dept", deptService.selectDeptById(parentId));
         return "system/dept/add";
@@ -73,7 +73,7 @@ public class DeptController extends BaseController
      * 修改
      */
     @GetMapping("/edit/{deptId}")
-    public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap)
+    public String edit(@PathVariable Long deptId, ModelMap mmap)
     {
         Dept dept = deptService.selectDeptById(deptId);
         if (StringUtils.isNotNull(dept) && 100L == deptId)
@@ -103,7 +103,7 @@ public class DeptController extends BaseController
     @RequiresPermissions("system:dept:remove")
     @PostMapping("/remove/{deptId}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("deptId") Long deptId)
+    public AjaxResult remove(@PathVariable Long deptId)
     {
         if (deptService.selectDeptCount(deptId) > 0)
         {
@@ -130,7 +130,7 @@ public class DeptController extends BaseController
      * 选择部门树
      */
     @GetMapping("/selectDeptTree/{deptId}")
-    public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap)
+    public String selectDeptTree(@PathVariable Long deptId, ModelMap mmap)
     {
         mmap.put("dept", deptService.selectDeptById(deptId));
         return "system/dept/tree";

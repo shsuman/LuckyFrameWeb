@@ -146,7 +146,7 @@ public class TaskExecuteController extends BaseController
 	 * 修改测试任务执行
 	 */
 	@GetMapping("/edit/{taskId}")
-	public String edit(@PathVariable("taskId") Integer taskId, ModelMap mmap)
+	public String edit(@PathVariable Integer taskId, ModelMap mmap)
 	{
 		TaskExecute taskExecute = taskExecuteService.selectTaskExecuteById(taskId);
 		mmap.put("taskExecute", taskExecute);
@@ -193,7 +193,7 @@ public class TaskExecuteController extends BaseController
 	 */
     @GetMapping("/gettaskExecuteListByProjectId/{projectId}")
 	@ResponseBody
-	public String getSchedulingListByProjectId(@PathVariable("projectId") Integer projectId)
+	public String getSchedulingListByProjectId(@PathVariable Integer projectId)
 	{
     	TaskExecute taskExecute= new TaskExecute();
     	if(projectId!=0){

@@ -66,7 +66,7 @@ public class OperlogController extends BaseController
 
     @RequiresPermissions("monitor:operlog:detail")
     @GetMapping("/detail/{operId}")
-    public String detail(@PathVariable("operId") Long operId, ModelMap mmap)
+    public String detail(@PathVariable Long operId, ModelMap mmap)
     {
         mmap.put("operLog", operLogService.selectOperLogById(operId));
         return "monitor/operlog/detail";

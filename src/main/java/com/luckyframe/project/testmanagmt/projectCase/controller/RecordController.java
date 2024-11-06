@@ -41,7 +41,7 @@ public class RecordController {
      * StepType默认类型 0 HTTP接口 1 Web UI 2 API驱动  3移动端
      */
     @PostMapping(value = "/insert",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity insertRecord(@RequestParam("file") MultipartFile file,@RequestParam("projectId") int ProjectId,@RequestParam("caseId") int CaseId,@RequestParam("stepType") int StepType) throws Exception {
+    public ResponseEntity insertRecord(@RequestParam MultipartFile file,@RequestParam("projectId") int ProjectId,@RequestParam("caseId") int CaseId,@RequestParam("stepType") int StepType) throws Exception {
         log.info("StepType:"+StepType);
         if (file.getOriginalFilename().toLowerCase().endsWith(".xlsx")){
             ExcelUtil<ProjectCaseSteps> util = new ExcelUtil<>(ProjectCaseSteps.class);

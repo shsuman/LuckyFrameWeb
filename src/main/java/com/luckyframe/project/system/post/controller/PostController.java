@@ -100,7 +100,7 @@ public class PostController extends BaseController
      * 修改岗位
      */
     @GetMapping("/edit/{postId}")
-    public String edit(@PathVariable("postId") Long postId, ModelMap mmap)
+    public String edit(@PathVariable Long postId, ModelMap mmap)
     {
         mmap.put("post", postService.selectPostById(postId));
         return "system/post/edit";

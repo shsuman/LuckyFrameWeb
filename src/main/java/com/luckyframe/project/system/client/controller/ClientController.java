@@ -86,7 +86,7 @@ public class ClientController extends BaseController
 	
     @RequiresPermissions("system:client:view")
     @GetMapping("/showMonitor/{clientId}")
-    public String showMonitor(@PathVariable("clientId") Integer clientId, ModelMap mmap) throws Exception
+    public String showMonitor(@PathVariable Integer clientId, ModelMap mmap) throws Exception
     {
     	Client client = clientService.selectClientById(clientId);
 		String result = HttpRequest.httpClientGet(
@@ -166,7 +166,7 @@ public class ClientController extends BaseController
 	 * 修改客户端管理
 	 */
 	@GetMapping("/edit/{clientId}")
-	public String edit(@PathVariable("clientId") Integer clientId, ModelMap mmap)
+	public String edit(@PathVariable Integer clientId, ModelMap mmap)
 	{
 		Client client = clientService.selectClientById(clientId);
 		mmap.put("projects", projectService.selectProjectsByClientId(clientId));
@@ -270,7 +270,7 @@ public class ClientController extends BaseController
 	 */
     @GetMapping("/getDriverPathList/{clientId}")
 	@ResponseBody
-	public String getDriverPathList(@PathVariable("clientId") Integer clientId)
+	public String getDriverPathList(@PathVariable Integer clientId)
 	{
 		List<String> driverPathList = clientService.selectClientDriverListById(clientId);
 		JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(driverPathList));
@@ -286,7 +286,7 @@ public class ClientController extends BaseController
 	 */
     @GetMapping("/getClientListByProjectId/{projectId}")
 	@ResponseBody
-	public String getClientListByProjectId(@PathVariable("projectId") Integer projectId)
+	public String getClientListByProjectId(@PathVariable Integer projectId)
 	{
     	List<Client> clientList = clientService.selectClientsByProjectId(projectId);
 		JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(clientList));
@@ -302,7 +302,7 @@ public class ClientController extends BaseController
 	 */
     @GetMapping("/getClientStatusByClientId/{clientId}")
 	@ResponseBody
-	public String getClientStatusByClientId(@PathVariable("clientId") Integer clientId)
+	public String getClientStatusByClientId(@PathVariable Integer clientId)
 	{
     	Client client = clientService.selectClientById(clientId);
 		return JSONObject.toJSONString(client);

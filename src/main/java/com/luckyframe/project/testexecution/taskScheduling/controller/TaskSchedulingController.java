@@ -94,7 +94,7 @@ public class TaskSchedulingController extends BaseController
         	mmap.put("defaultProjectId", ShiroUtils.getProjectId());
         	List<Client> defaultClients=clientService.selectClientsByProjectId(ShiroUtils.getProjectId());
         	if(defaultClients.size()>0){
-        		mmap.put("defaultClientId", defaultClients.get(0).getClientId());
+        		mmap.put("defaultClientId", defaultClients.getFirst().getClientId());
         	}
         }
         
@@ -137,7 +137,7 @@ public class TaskSchedulingController extends BaseController
         List<Project> projects=projectService.selectProjectAll(0);
         mmap.put("projects", projects);
         if(projects.size()>0){
-        	Integer projectId=projects.get(0).getProjectId();
+        	Integer projectId=projects.getFirst().getProjectId();
             if(StringUtils.isNotEmpty(ShiroUtils.getProjectId())){
             	projectId = ShiroUtils.getProjectId();
             	mmap.put("defaultProjectId", projectId);
@@ -154,7 +154,7 @@ public class TaskSchedulingController extends BaseController
 			}
 			mmap.put("envList",envList);
         	if(clientList.size()>0){
-        		List<String> driverPathList = clientService.selectClientDriverListById(clientList.get(0).getClientId());
+        		List<String> driverPathList = clientService.selectClientDriverListById(clientList.getFirst().getClientId());
         		mmap.put("driverPathList", driverPathList);
         	}       	
         }       
@@ -204,7 +204,7 @@ public class TaskSchedulingController extends BaseController
 	 * 修改测试任务调度
 	 */
 	@GetMapping("/edit/{schedulingId}")
-	public String edit(@PathVariable("schedulingId") Integer schedulingId, ModelMap mmap)
+	public String edit(@PathVariable Integer schedulingId, ModelMap mmap)
 	{
 		TaskScheduling taskScheduling = taskSchedulingService.selectTaskSchedulingById(schedulingId);
         List<Project> projects=projectService.selectProjectAll(0);
@@ -329,7 +329,7 @@ public class TaskSchedulingController extends BaseController
 	 */
     @GetMapping("/getSchedulingListByProjectId/{projectId}")
 	@ResponseBody
-	public String getSchedulingListByProjectId(@PathVariable("projectId") Integer projectId)
+	public String getSchedulingListByProjectId(@PathVariable Integer projectId)
 	{
     	List<TaskScheduling> taskSchedulingList = taskSchedulingService.selectTaskSchedulingListByProjectId(projectId);
 		JSONArray jsonArray = JSONArray.parseArray(JSON.toJSONString(taskSchedulingList));
@@ -415,7 +415,7 @@ public class TaskSchedulingController extends BaseController
 		List<Client> clientList = clientService.selectClientList(client);
     	if(clientList.size()>0){
             mmap.put("clientList", clientList);
-    		List<String> driverPathList = clientService.selectClientDriverListById(clientList.get(0).getClientId());
+    		List<String> driverPathList = clientService.selectClientDriverListById(clientList.getFirst().getClientId());
     		mmap.put("driverPathList", driverPathList);
     	}
 	    return "testexecution/taskScheduling/uploadJar";
@@ -433,7 +433,7 @@ public class TaskSchedulingController extends BaseController
 	@Log(title = "上传驱动到客户端", businessType = BusinessType.UPLOAD)
 	@PostMapping("/uploadJar")
 	@ResponseBody
-	public AjaxResult uploadJar(@RequestParam("drivenfile") MultipartFile file, @RequestParam("clientIp") String clientIp,@RequestParam("driverPath") String driverPath) {
+	public AjaxResult uploadJar(@RequestParam("drivenfile") MultipartFile file, @RequestParam String clientIp,@RequestParam String driverPath) {
 		String result;
 		try {
 			if (!file.isEmpty()) {

@@ -92,7 +92,7 @@ public class RoleController extends BaseController
      * 修改角色
      */
     @GetMapping("/edit/{roleId}")
-    public String edit(@PathVariable("roleId") Long roleId, ModelMap mmap)
+    public String edit(@PathVariable Long roleId, ModelMap mmap)
     {
     	mmap.put("projects", projectService.selectProjectsByRoleId(roleId.intValue()));
         mmap.put("role", roleService.selectRoleById(roleId));
@@ -116,7 +116,7 @@ public class RoleController extends BaseController
      * 新增数据权限
      */
     @GetMapping("/rule/{roleId}")
-    public String rule(@PathVariable("roleId") Long roleId, ModelMap mmap)
+    public String rule(@PathVariable Long roleId, ModelMap mmap)
     {
         mmap.put("role", roleService.selectRoleById(roleId));
         return "system/role/rule";

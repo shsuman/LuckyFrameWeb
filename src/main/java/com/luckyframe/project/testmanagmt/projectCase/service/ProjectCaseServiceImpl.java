@@ -186,11 +186,11 @@ public class ProjectCaseServiceImpl implements IProjectCaseService
 			ProjectCase projectCase = projectCaseMapper.selectProjectCaseById(caseId);
 			
 			if(projectPlanCaseMapper.selectProjectPlanCaseCountByCaseId(caseId)>0){
-				throw new BusinessException(String.format("【%1$s】已绑定测试计划,不能删除", projectCase.getCaseSign()));
+				throw new BusinessException("【%1$s】已绑定测试计划,不能删除".formatted(projectCase.getCaseSign()));
 			}
 			
 			if(!PermissionUtils.isProjectPermsPassByProjectId(projectCase.getProjectId())){	
-				  throw new BusinessException(String.format("用例【%1$s】没有项目删除权限", projectCase.getCaseSign()));
+				  throw new BusinessException("用例【%1$s】没有项目删除权限".formatted(projectCase.getCaseSign()));
 			}
 			
 			projectCaseStepsMapper.deleteProjectCaseStepsByCaseId(caseId);
@@ -209,7 +209,7 @@ public class ProjectCaseServiceImpl implements IProjectCaseService
     {
         long caseId = StringUtils.isNull(projectCase.getCaseId()) ? -1L : projectCase.getCaseId();
         List<ProjectCase> info = projectCaseMapper.checkProjectCaseNameUnique(projectCase);
-        if (info.size()>0 && (info.get(0).getCaseId().longValue() != caseId || projectCase.getPriority()==99999999))
+        if (info.size()>0 && (info.getFirst().getCaseId().longValue() != caseId || projectCase.getPriority()==99999999))
         {
             return ProjectCaseConstants.PROJECTCASE_NAME_NOT_UNIQUE;
         }

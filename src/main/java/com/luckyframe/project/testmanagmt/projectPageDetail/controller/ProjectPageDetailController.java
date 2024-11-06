@@ -68,7 +68,7 @@ public class ProjectPageDetailController extends BaseController {
      * 新增页面详情
      */
     @GetMapping("/add/{id}")
-    public String add(@PathVariable("id") Integer id, ModelMap mmap) {
+    public String add(@PathVariable Integer id, ModelMap mmap) {
         ProjectPageDetail projectPageDetail = new ProjectPageDetail();
         projectPageDetail.setPageId(id);
         mmap.put("projectPageDetail", projectPageDetail);
@@ -99,7 +99,7 @@ public class ProjectPageDetailController extends BaseController {
      * 修改页面详情
      */
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") Integer id, ModelMap mmap) {
+    public String edit(@PathVariable Integer id, ModelMap mmap) {
         ProjectPageDetail projectPageDetail = new ProjectPageDetail();
         projectPageDetail.setPageId(id);
         List<ProjectPageDetail> list = projectPageDetailService.selectProjectPageDetailList(projectPageDetail);
@@ -111,14 +111,14 @@ public class ProjectPageDetailController extends BaseController {
      * 修改页面详情
      */
     @GetMapping("/editdetail/{id}")
-    public String editDetail(@PathVariable("id") Integer id, ModelMap mmap) {
+    public String editDetail(@PathVariable Integer id, ModelMap mmap) {
         ProjectPageDetail projectPageDetail = projectPageDetailService.selectProjectPageDetailById(id);
         mmap.put("projectPageDetail", projectPageDetail);
         return prefix + "/edit";
     }
 
     @GetMapping("/list/{id}")
-    public String getListByPageId(@PathVariable("id") Integer id, ModelMap mmap) {
+    public String getListByPageId(@PathVariable Integer id, ModelMap mmap) {
         startPage();
         ProjectPageDetail projectPageDetail = projectPageDetailService.selectProjectPageDetailById(id);
         List<ProjectPageDetail> list = projectPageDetailService.selectProjectPageDetailList(projectPageDetail);

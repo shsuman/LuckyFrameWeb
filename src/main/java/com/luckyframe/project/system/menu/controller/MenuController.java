@@ -53,7 +53,7 @@ public class MenuController extends BaseController
     @RequiresPermissions("system:menu:remove")
     @PostMapping("/remove/{menuId}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("menuId") Long menuId)
+    public AjaxResult remove(@PathVariable Long menuId)
     {
         if (menuService.selectCountMenuByParentId(menuId) > 0)
         {
@@ -70,7 +70,7 @@ public class MenuController extends BaseController
      * 新增
      */
     @GetMapping("/add/{parentId}")
-    public String add(@PathVariable("parentId") Long parentId, ModelMap mmap)
+    public String add(@PathVariable Long parentId, ModelMap mmap)
     {
         Menu menu;
         if (0L != parentId)
@@ -103,7 +103,7 @@ public class MenuController extends BaseController
      * 修改菜单
      */
     @GetMapping("/edit/{menuId}")
-    public String edit(@PathVariable("menuId") Long menuId, ModelMap mmap)
+    public String edit(@PathVariable Long menuId, ModelMap mmap)
     {
         mmap.put("menu", menuService.selectMenuById(menuId));
         return "system/menu/edit";
@@ -164,7 +164,7 @@ public class MenuController extends BaseController
      * 选择菜单树
      */
     @GetMapping("/selectMenuTree/{menuId}")
-    public String selectMenuTree(@PathVariable("menuId") Long menuId, ModelMap mmap)
+    public String selectMenuTree(@PathVariable Long menuId, ModelMap mmap)
     {
         mmap.put("menu", menuService.selectMenuById(menuId));
         return "system/menu/tree";

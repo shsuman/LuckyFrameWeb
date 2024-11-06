@@ -52,10 +52,10 @@ public class POUtil extends BaseController {
         List<ProjectPageObject> ProjectPageObjectList = projectPageObjectService.selectProjectPageObjectList(projectPageObject);
         ProjectPageDetail projectPageDetail = new ProjectPageDetail();
         projectPageDetail.setElement(element);
-        projectPageDetail.setPageId(ProjectPageObjectList.get(0).getPageId());
+        projectPageDetail.setPageId(ProjectPageObjectList.getFirst().getPageId());
         List<ProjectPageDetail> projectPageDetailList = projectPageDetailService.selectProjectPageDetailList(projectPageDetail);
-        String pageId = String.valueOf(ProjectPageObjectList.get(0).getPageId());
-        String elementId = String.valueOf(projectPageDetailList.get(0).getId());
+        String pageId = String.valueOf(ProjectPageObjectList.getFirst().getPageId());
+        String elementId = String.valueOf(projectPageDetailList.getFirst().getId());
         stepPath = pageId + "." + elementId;
         return stepPath;
     }

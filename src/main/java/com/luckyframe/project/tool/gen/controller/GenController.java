@@ -55,7 +55,7 @@ public class GenController extends BaseController
     @RequiresPermissions("tool:gen:code")
     @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/genCode/{tableName}")
-    public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException
+    public void genCode(HttpServletResponse response, @PathVariable String tableName) throws IOException
     {
         byte[] data = genService.generatorCode(tableName);
         response.reset();

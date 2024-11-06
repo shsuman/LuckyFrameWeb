@@ -79,7 +79,7 @@ public class JobController extends BaseController
     
     @RequiresPermissions("monitor:job:detail")
     @GetMapping("/detail/{jobId}")
-    public String detail(@PathVariable("jobId") Long jobId, ModelMap mmap)
+    public String detail(@PathVariable Long jobId, ModelMap mmap)
     {
         mmap.put("name", "job");
         mmap.put("job", jobService.selectJobById(jobId));
@@ -135,7 +135,7 @@ public class JobController extends BaseController
      * 修改调度
      */
     @GetMapping("/edit/{jobId}")
-    public String edit(@PathVariable("jobId") Long jobId, ModelMap mmap)
+    public String edit(@PathVariable Long jobId, ModelMap mmap)
     {
         mmap.put("job", jobService.selectJobById(jobId));
         return "monitor/job/edit";

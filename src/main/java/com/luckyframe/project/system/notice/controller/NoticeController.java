@@ -75,7 +75,7 @@ public class NoticeController extends BaseController
      * 修改公告
      */
     @GetMapping("/edit/{noticeId}")
-    public String edit(@PathVariable("noticeId") Long noticeId, ModelMap mmap)
+    public String edit(@PathVariable Long noticeId, ModelMap mmap)
     {
         mmap.put("notice", noticeService.selectNoticeById(noticeId));
         return "system/notice/edit";
